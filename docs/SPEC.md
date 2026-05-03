@@ -273,10 +273,10 @@ This is the visual answer to the network-effects question. The viewer feels: "Sa
 ### 6.2 Who Sam is
 
 - Sophomore at CMU, CS major, minor in HCI.
-- First Cursor Campus Ambassador in the Cohort 1 wave — a US-only cohort by design, ~25 ambassadors across the top 10 US programs.
+- First Cursor Campus Ambassador in the Cohort 1 wave — a US-only cohort by design, ~45 ambassadors across 18 top-20 US programs, weighted toward density at MIT/Stanford/Berkeley/CMU/Columbia.
 - Joined because a friend forwarded him the application after seeing a Cafe Cursor flyer.
 - Previously: ran the CMU AI club's beginner workshop series. Active on Twitter. Built a small open-source tool a few hundred people use.
-- Why he matters: he's the median strong ambassador in the US foundation, not the standout. The viewer should feel "we have ~25 of these people in Year 1, all in the US, and the international wave only gets seeded after they're running."
+- Why he matters: he's the median strong ambassador in the US foundation, not the standout. The viewer should feel "we have ~45 of these people in Year 1, all in the US, and the international wave only gets seeded after they're running."
 
 ### 6.3 The four phases (Sam's panel content)
 
@@ -305,7 +305,7 @@ This is the visual answer to the network-effects question. The viewer feels: "Sa
 - Visible: laptop showing a Notion doc titled "Cohort 2 — CMU lead succession plan." A Zoom window with three candidate ambassador interviewees in it.
 - Calendar: "Interview: junior CS, AI Society VP — 2pm" / "Hand-off lunch with Lily (Cohort 2) — Thu" / "talk at HackCMU — Sat."
 - Slack: a thread where Sam is answering a question another ambassador asked, before Rachael sees it. Tab open to a new "intl-pilot" channel where ETH and Tsinghua ambassadors have just been added — Sam is reading, not posting yet. The US Cohort 1 is the foundation; the international wave is forming around them.
-- Caption: *"Sam graduates in 14 months. He's interviewing his successor. The CMU community will outlast him — and the US foundation, now ~80 ambassadors across 25 schools, is finally strong enough that the first international pilots are coming online."*
+- Caption: *"Sam graduates in 14 months. He's interviewing his successor. The CMU community will outlast him — and the US foundation, now ~100 ambassadors across 30 schools, is finally strong enough that the first international pilots are coming online."*
 
 ### 6.4 Implementation
 

@@ -98,7 +98,7 @@ export const SAM_PHASES: Record<Phase, SamPhaseContent> = {
     setting:
       "Same desk, slightly more lived-in. A Cursor × ML Week poster on the wall. A small framed photo of his Cohort 1 group.",
     caption:
-      "Sam graduates in 14 months. He's interviewing his successor. The CMU community will outlast him — and the US foundation, now ~80 ambassadors across 25 schools, is finally strong enough that the first international pilots are coming online.",
+      "Sam graduates in 14 months. He's interviewing his successor. The CMU community will outlast him — and the US foundation, now ~100 ambassadors across 30 schools, is finally strong enough that the first international pilots are coming online.",
     visible: [
       "Notion doc: Cohort 2 — CMU lead succession plan",
       "Zoom: 3 candidate ambassador interviewees",
@@ -141,7 +141,7 @@ export const SAM_PHASES: Record<Phase, SamPhaseContent> = {
     setting:
       "Same desk, slightly more lived-in. A Cursor × ML Week poster on the wall. A small framed photo of his Cohort 1 group.",
     caption:
-      "Sam graduates in 14 months. He's interviewing his successor. The CMU community will outlast him — and the US foundation, now ~80 ambassadors across 25 schools, is finally strong enough that the first international pilots are coming online.",
+      "Sam graduates in 14 months. He's interviewing his successor. The CMU community will outlast him — and the US foundation, now ~100 ambassadors across 30 schools, is finally strong enough that the first international pilots are coming online.",
     visible: [
       "Notion doc: Cohort 2 — CMU lead succession plan",
       "Zoom: 3 candidate ambassador interviewees",

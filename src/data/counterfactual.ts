@@ -29,10 +29,10 @@ export const COUNTERFACTUAL: CounterfactualEndpoint = {
  * → April 2030. Each marker has a t-day offset and a short label.
  */
 export const COUNTERFACTUAL_WITH_MARKERS: { tDays: number; label: string }[] = [
-  { tDays: 92, label: "Cohort 1 launches · 25 ambassadors" },
+  { tDays: 92, label: "Cohort 1 launches · 45 ambassadors · 18 schools" },
   { tDays: 153, label: "First themed week · CMU" },
   { tDays: 214, label: "12 themed weeks running · 30 declared labs" },
-  { tDays: 335, label: "Year 1 close · 80 ambassadors · 25 schools" },
+  { tDays: 335, label: "Year 1 close · 100 ambassadors · 30 schools" },
   { tDays: 700, label: "Cohort 2 · first international pilots scaled" },
   { tDays: 1065, label: "120 declared-standard labs · 4 continents" },
   { tDays: 1431, label: "220 labs · 4,200 DHVC actives" },
