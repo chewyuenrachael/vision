@@ -1,26 +1,123 @@
 @import "tailwindcss";
 
+/*
+ * Cursor Campus Vision — visual system
+ * Anchors: warm cream + charcoal + terracotta accent. Bespoke, hand-drawn-ish.
+ * SPEC §10. No glass, no neon, no gradients beyond cafe atmosphere.
+ */
+
+@theme {
+  --color-cream: #faf7f2;
+  --color-cream-warm: #f3ecdf;
+  --color-cream-cool: #f7f4ee;
+  --color-ink: #1a1a1a;
+  --color-ink-soft: #4a4a4a;
+  --color-ink-mute: #8a8378;
+  --color-terracotta: #c4644a;
+  --color-terracotta-soft: #e09a82;
+  --color-teal: #345e5a;
+  --color-paper: #f5efe2;
+  --color-pin: #b94f3a;
+
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-hand: var(--font-caveat), "Comic Sans MS", cursive;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --atmosphere: var(--color-cream-cool);
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100dvh;
+}
+
+/* Phase-driven warm/cool atmosphere shift for the cafe. SPEC §4.2 */
+[data-phase="now"] {
+  --atmosphere: #f5f0e6;
+}
+[data-phase="q1"] {
+  --atmosphere: #f4ecdf;
+}
+[data-phase="q2"] {
+  --atmosphere: #f1e7d6;
+}
+[data-phase="year1"] {
+  --atmosphere: #efe2cc;
+}
+[data-phase="future"] {
+  --atmosphere: #efe2cc;
+}
+
+/* The hand-drawn line look — apply to SVG strokes that should feel sketched. */
+.ink-stroke {
+  stroke: var(--color-ink);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.ink-fill {
+  fill: var(--color-ink);
+}
+
+/* Slight wobble for hand-drawn line work without animating */
+.sketch path,
+.sketch line,
+.sketch polyline,
+.sketch rect,
+.sketch circle {
+  vector-effect: non-scaling-stroke;
+}
+
+/* Custom scrollbar — cream-on-cream so it disappears into the page */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(26, 26, 26, 0.15);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(26, 26, 26, 0.3);
+}
+
+/* Selection */
+::selection {
+  background: var(--color-terracotta);
+  color: var(--color-cream);
+}
+
+/* Soft scroll-snap on the main scroller. SPEC §11.2 — soft proximity, not mandatory. */
+.scene-snap {
+  scroll-snap-align: start;
+  scroll-margin-top: 88px;
+}
+
+main.snap-scroll {
+  scroll-snap-type: y proximity;
+}
+
+/* Reduce motion respect */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
 }
