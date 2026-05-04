@@ -10,7 +10,8 @@ import { T_MAX_EXTENDED, T_YEAR1 } from "@/lib/dates";
 
 const VIEW_W = 1000;
 const VIEW_H = 280;
-const PAD_X = 60;
+/** Left inset — must fit longest axis label (“without” + tracking) inside viewBox when textAnchor="end". */
+const PAD_X = 102;
 
 export function DivergingTimelines() {
   const { t } = useTimeline();
@@ -215,9 +216,9 @@ export function DivergingTimelines() {
         Apr 2030
       </text>
 
-      {/* Top/bottom labels */}
+      {/* Top/bottom axis lane labels — x must leave room for full “WITHOUT” when anchored end */}
       <text
-        x={PAD_X - 12}
+        x={PAD_X - 4}
         y={VIEW_H / 2 - 24}
         textAnchor="end"
         fontSize="11"
@@ -229,7 +230,7 @@ export function DivergingTimelines() {
         with
       </text>
       <text
-        x={PAD_X - 12}
+        x={PAD_X - 4}
         y={VIEW_H / 2 + 28}
         textAnchor="end"
         fontSize="11"
