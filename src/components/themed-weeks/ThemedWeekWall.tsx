@@ -7,12 +7,16 @@ import { THEMED_WEEKS } from "@/data/themed-weeks";
 import { useTimeline } from "@/components/timeline/TimelineProvider";
 import { isVisibleAt } from "@/lib/phases";
 import { dateFromT } from "@/lib/dates";
-import type { ThemedWeek } from "@/lib/types";
+import type { Phase, ThemedWeek } from "@/lib/types";
+import { WALL_OUTCOMES_BY_PHASE } from "@/data/wall-outcomes";
+import { SceneTag } from "@/components/ui/SceneTag";
 
 function statusFor(
   week: ThemedWeek,
   current: Date,
+  phase: Phase,
 ): "upcoming" | "running" | "happened" {
+  if (week.id === "wetlab" && phase === "q2") return "running";
   const start = week.monthDate;
   const end = new Date(
     Date.UTC(
@@ -32,13 +36,14 @@ function statusFor(
 export function ThemedWeekWall() {
   const { phase, t } = useTimeline();
   const [openWeek, setOpenWeek] = useState<ThemedWeek | null>(null);
+  const wallStats = WALL_OUTCOMES_BY_PHASE[phase];
 
   const cards = useMemo(() => {
     const current = dateFromT(t);
     return THEMED_WEEKS.map((w) => ({
       week: w,
       visible: isVisibleAt(w.firstVisibleAt, phase),
-      status: statusFor(w, current),
+      status: statusFor(w, current, phase),
     }));
   }, [phase, t]);
 
@@ -47,13 +52,14 @@ export function ThemedWeekWall() {
       id="themed-weeks"
       className="scene-snap relative isolate w-full bg-cream px-4 pb-20 pt-16"
     >
+      <SceneTag />
       <div className="mx-auto w-full max-w-7xl">
-        <div className="flex items-baseline justify-between gap-6">
-          <div>
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+          <div className="max-w-2xl flex-1">
             <div className="font-body text-xs uppercase tracking-[0.22em] text-ink-mute">
               Scene 2
             </div>
-            <h2 className="mt-1 font-display text-3xl tracking-tight text-ink sm:text-4xl">
+            <h2 className="scene-title mt-1 text-3xl tracking-tight text-ink sm:text-4xl">
               The themed week wall
             </h2>
             <p className="mt-3 max-w-2xl font-body text-base text-ink-soft">
@@ -62,8 +68,25 @@ export function ThemedWeekWall() {
               institution; Europe is a deliberate Q3 pilot, not a wish.
             </p>
           </div>
-          <div className="hidden text-right font-body text-xs leading-tight text-ink-mute sm:block">
-            <div>Click a wrapped week to read its recap.</div>
+          <div className="w-full shrink-0 rounded-md border border-ink/15 bg-cream-cool/50 px-4 py-3 font-body text-sm leading-relaxed text-ink-soft sm:max-w-sm">
+            <div className="font-body text-[10px] uppercase tracking-[0.2em] text-ink-mute">
+              Wrapped weeks · cumulative proof
+            </div>
+            <p className="mt-2 text-[13px] text-ink">
+              <span className="font-medium text-terracotta">
+                {wallStats.wrappedWeeks} weeks wrapped
+              </span>
+              {" · "}
+              {wallStats.studentsTouched.toLocaleString()} students touched
+              {" · "}
+              {wallStats.labDemos} lab demos run
+              {" · "}
+              {wallStats.feedbackRouted} product feedback items routed to
+              engineering
+              {" · "}
+              {wallStats.ambassadorsDiscovered} cohort 1 ambassadors discovered
+              through these weeks
+            </p>
           </div>
         </div>
 
@@ -75,6 +98,11 @@ export function ThemedWeekWall() {
                 week={week}
                 status={status}
                 index={i}
+                pulseHappening={
+                  phase === "q2" &&
+                  week.id === "wetlab" &&
+                  status === "running"
+                }
                 onClick={() => setOpenWeek(week)}
               />
             ) : (

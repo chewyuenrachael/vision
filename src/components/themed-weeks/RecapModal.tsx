@@ -3,6 +3,7 @@
 import { Modal } from "@/components/ui/Modal";
 import { Sketch } from "@/components/cafe/sketches";
 import { recapForWeekId } from "@/data/themed-week-recaps";
+import { RECAP_MODAL_AUGMENT } from "@/data/themed-week-recap-modal";
 import type { ThemedWeek } from "@/lib/types";
 
 interface Props {
@@ -12,12 +13,13 @@ interface Props {
 
 export function RecapModal({ week, onClose }: Props) {
   const recap = week ? recapForWeekId(week.id) : null;
-  const open = Boolean(week && recap);
+  const extra = week ? RECAP_MODAL_AUGMENT[week.id] : undefined;
+  const open = Boolean(week && recap && extra);
   const titleId = "recap-title";
 
   return (
     <Modal open={open} onClose={onClose} labelledBy={titleId}>
-      {week && recap ? (
+      {week && recap && extra ? (
         <div>
           <div className="flex items-baseline justify-between gap-4 border-b border-ink/10 pb-4">
             <div>
@@ -44,51 +46,37 @@ export function RecapModal({ week, onClose }: Props) {
             </button>
           </div>
 
-          <div className="mt-5 grid gap-6 sm:grid-cols-[1.4fr_1fr]">
+          <div className="mt-5 grid gap-6 sm:grid-cols-[1.35fr_1fr]">
             <div>
-              <div>
-                <div className="font-body text-[10px] uppercase tracking-[0.18em] text-ink-mute">
-                  Partners
-                </div>
-                <div className="mt-1 font-body text-sm text-ink-soft">
-                  {recap.partners.join(" · ")}
-                </div>
-              </div>
+              <p className="font-hand text-[17px] italic leading-relaxed text-ink">
+                {extra.ambassadorRecap}
+              </p>
 
               <div className="mt-5">
                 <div className="font-body text-[10px] uppercase tracking-[0.18em] text-ink-mute">
-                  By the numbers
+                  Outcomes
                 </div>
-                <ul className="mt-2 space-y-1.5 font-body text-sm text-ink-soft">
-                  {recap.stats.map((s, i) => (
+                <ul className="mt-2 space-y-2 font-body text-sm text-ink-soft">
+                  {extra.outcomeBullets.map((line, i) => (
                     <li key={i} className="flex gap-2">
                       <span className="select-none text-terracotta">·</span>
-                      <span>{s}</span>
+                      <span>{line}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="mt-5">
+              <div className="mt-5 border-t border-ink/10 pt-4">
                 <div className="font-body text-[10px] uppercase tracking-[0.18em] text-ink-mute">
-                  Builds
+                  Run by
                 </div>
-                <ul className="mt-2 space-y-3 font-body text-sm text-ink-soft">
-                  {recap.builds.map((b, i) => (
-                    <li key={i}>
-                      <div className="font-body text-xs uppercase tracking-wider text-ink">
-                        {b.builder}
-                      </div>
-                      <div className="mt-0.5 leading-relaxed">
-                        {b.description}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                <p className="mt-1 font-body text-sm font-medium text-ink">
+                  {extra.runBy}
+                </p>
               </div>
 
-              <blockquote className="mt-6 border-l-2 border-terracotta pl-4">
-                <p className="font-display text-lg leading-snug text-ink">
+              <blockquote className="mt-6 border-l-2 border-terracotta/50 pl-4">
+                <p className="font-display text-base leading-snug text-ink">
                   “{recap.pullQuote.text}”
                 </p>
                 <footer className="mt-2 font-body text-xs uppercase tracking-wider text-ink-mute">
@@ -97,29 +85,21 @@ export function RecapModal({ week, onClose }: Props) {
               </blockquote>
             </div>
 
-            <div className="flex flex-col items-stretch gap-3">
+            <div>
               <div className="font-body text-[10px] uppercase tracking-[0.18em] text-ink-mute">
-                Photos
+                Student spotlight
               </div>
-              <div className="grid grid-cols-2 gap-3">
-                {recap.photos.map((sk, i) => {
-                  const rotation = ((i * 53) % 9) - 4;
-                  return (
-                    <div
-                      key={i}
-                      className="relative bg-cream p-1.5 pb-3 shadow-[0_2px_6px_-1px_rgba(26,26,26,0.25)]"
-                      style={{ transform: `rotate(${rotation}deg)` }}
-                    >
-                      <div className="absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pin" />
-                      <div className="aspect-square w-full bg-cream-warm">
-                        <Sketch id={sk} />
-                      </div>
-                    </div>
-                  );
-                })}
+              <div
+                className="relative mt-3 max-w-[220px] bg-cream p-1.5 pb-3 shadow-[0_2px_6px_-1px_rgba(26,26,26,0.25)]"
+                style={{ transform: "rotate(-1.5deg)" }}
+              >
+                <div className="absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pin" />
+                <div className="aspect-square w-full bg-cream-warm">
+                  <Sketch id={extra.studentSpotlight.sketchId} />
+                </div>
               </div>
-              <p className="mt-2 font-hand text-base text-ink-mute">
-                workshop, week of {week.monthLabel}
+              <p className="mt-3 font-body text-sm text-ink-soft">
+                {extra.studentSpotlight.caption}
               </p>
             </div>
           </div>

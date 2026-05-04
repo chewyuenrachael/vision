@@ -10,9 +10,16 @@ interface Props {
   status: Status;
   onClick: () => void;
   index: number;
+  pulseHappening?: boolean;
 }
 
-export function ThemedWeekCard({ week, status, onClick, index }: Props) {
+export function ThemedWeekCard({
+  week,
+  status,
+  onClick,
+  index,
+  pulseHappening = false,
+}: Props) {
   const isClickable = status === "happened";
   const rotation = ((index * 37) % 5) - 2;
 
@@ -57,10 +64,12 @@ export function ThemedWeekCard({ week, status, onClick, index }: Props) {
       transition={{ duration: 0.35, delay: index * 0.02 }}
       whileHover={isClickable ? { y: -4, rotate: rotation } : undefined}
       className={`group relative flex h-full flex-col items-start gap-3 rounded-md border ${styles.border} ${styles.bg} px-5 py-5 text-left transition-shadow ${
+        pulseHappening ? "happening-now-pulse " : ""
+      }${
         isClickable
           ? "cursor-pointer shadow-[0_2px_6px_-2px_rgba(26,26,26,0.18)] hover:shadow-[0_12px_28px_-12px_rgba(26,26,26,0.4)]"
           : "shadow-[0_1px_3px_-1px_rgba(26,26,26,0.12)]"
-      } ${status === "running" ? "shadow-[0_0_0_4px_rgba(196,100,74,0.12)]" : ""}`}
+      }`}
       style={{ minHeight: 156 }}
       aria-label={`${week.title} at ${week.location}, ${status}`}
     >
