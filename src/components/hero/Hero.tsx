@@ -65,9 +65,9 @@ export function Hero() {
           </h1>
 
           <p className="mt-8 max-w-2xl font-body text-lg leading-relaxed text-ink-soft sm:text-xl">
-            The next generation of engineers is in a lab right now, choosing the
+            The next generation of engineers is being made right now, choosing the
             tool they’ll use for the next decade. This is the world we’re
-            building for them — and with them.
+            building with them — here’s how it could look.
           </p>
 
           <div className="mt-12 flex items-baseline gap-3">
