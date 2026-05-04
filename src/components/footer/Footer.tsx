@@ -39,10 +39,12 @@ export function Footer() {
             </span>
           </a>
           <a
-            href="#hero"
-            className="group inline-flex items-baseline gap-1 underline-offset-4 hover:underline"
+            href="https://www.notion.so/Cursor-on-Campus-33e152e1dde2803ca5cacd8906dbd006?source=copy_link"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline-offset-4 hover:underline"
           >
-            <span>30-60-90 plan</span>
+            30-60-90 plan
           </a>
           <button
             type="button"
