@@ -302,22 +302,22 @@ function BgWhiteboard({ active }: { active: boolean }) {
         </g>
       ))}
 
-      {/* Arrow + side annotation */}
+      {/* Arrow + side annotation — keep left of the todo column so text never collides */}
       <path
-        d="M 132 50 Q 156 48, 178 56"
+        d="M 132 52 Q 156 50, 172 58"
         strokeWidth="0.9"
         stroke="var(--color-ink)"
         opacity="0.7"
       />
       <path
-        d="M 174 52 L 180 56 L 174 60"
+        d="M 168 54 L 174 58 L 168 62"
         strokeWidth="0.9"
         stroke="var(--color-ink)"
         opacity="0.7"
       />
       <text
-        x="148"
-        y="46"
+        x="124"
+        y="40"
         fontFamily="var(--font-lora), Georgia, serif"
         fontSize="7"
         fill="var(--color-ink)"
@@ -330,7 +330,7 @@ function BgWhiteboard({ active }: { active: boolean }) {
       {/* Small column on the right — to-dos */}
       <text
         x="186"
-        y="46"
+        y="54"
         fontFamily="var(--font-lora), Georgia, serif"
         fontSize="7"
         fill="var(--color-ink)"
@@ -341,7 +341,7 @@ function BgWhiteboard({ active }: { active: boolean }) {
       </text>
       <text
         x="186"
-        y="58"
+        y="66"
         fontFamily="var(--font-lora), Georgia, serif"
         fontSize="7"
         fill="var(--color-ink)"
@@ -352,7 +352,7 @@ function BgWhiteboard({ active }: { active: boolean }) {
       </text>
       <text
         x="186"
-        y="70"
+        y="78"
         fontFamily="var(--font-lora), Georgia, serif"
         fontSize="7"
         fill="var(--color-ink)"
