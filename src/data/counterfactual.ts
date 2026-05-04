@@ -43,7 +43,7 @@ export const COUNTERFACTUAL_WITHOUT_MARKERS: {
   tDays: number;
   label: string;
 }[] = [
-  { tDays: 92, label: "Marketing as usual" },
+  { tDays: 92, label: "no campus program" },
   { tDays: 700, label: "Same revenue, no generational moat" },
   { tDays: 1431, label: "2030 grad reaches for whatever Anthropic captured" },
 ];
