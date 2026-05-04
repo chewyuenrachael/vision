@@ -302,24 +302,24 @@ function BgWhiteboard({ active }: { active: boolean }) {
         </g>
       ))}
 
-      {/* Arrow + side annotation — keep left of the todo column so text never collides */}
+      {/* Arrow + side annotation — keep left of the todo column; todos use smaller type so they stay inside inner rect (x≤222) */}
       <path
-        d="M 132 52 Q 156 50, 172 58"
+        d="M 124 52 Q 142 47, 158 56"
         strokeWidth="0.9"
         stroke="var(--color-ink)"
         opacity="0.7"
       />
       <path
-        d="M 168 54 L 174 58 L 168 62"
+        d="M 154 54 L 160 58 L 154 62"
         strokeWidth="0.9"
         stroke="var(--color-ink)"
         opacity="0.7"
       />
       <text
-        x="124"
+        x="108"
         y="40"
         fontFamily="var(--font-lora), Georgia, serif"
-        fontSize="7"
+        fontSize="6"
         fill="var(--color-ink)"
         opacity="0.7"
         stroke="none"
@@ -329,10 +329,10 @@ function BgWhiteboard({ active }: { active: boolean }) {
 
       {/* Small column on the right — to-dos */}
       <text
-        x="186"
+        x="162"
         y="54"
         fontFamily="var(--font-lora), Georgia, serif"
-        fontSize="7"
+        fontSize="6"
         fill="var(--color-ink)"
         opacity="0.7"
         stroke="none"
@@ -340,10 +340,10 @@ function BgWhiteboard({ active }: { active: boolean }) {
         catering ✓
       </text>
       <text
-        x="186"
-        y="66"
+        x="162"
+        y="65"
         fontFamily="var(--font-lora), Georgia, serif"
-        fontSize="7"
+        fontSize="6"
         fill="var(--color-ink)"
         opacity="0.7"
         stroke="none"
@@ -351,10 +351,10 @@ function BgWhiteboard({ active }: { active: boolean }) {
         room GHC 4307
       </text>
       <text
-        x="186"
-        y="78"
+        x="162"
+        y="76"
         fontFamily="var(--font-lora), Georgia, serif"
-        fontSize="7"
+        fontSize="6"
         fill="var(--color-ink)"
         opacity="0.7"
         stroke="none"
