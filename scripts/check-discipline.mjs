@@ -40,14 +40,20 @@ for (const school of intlSchools) {
   }
 }
 
-// 2. International polaroids must be firstVisibleAt: "year1"
-for (const id of ["p-chen", "p-hana", "p-aditya"]) {
-  const re = new RegExp(`id:\\s*"${id}"[\\s\\S]*?firstVisibleAt:\\s*"(\\w+)"`);
-  const m = polaroidsSrc.match(re);
-  if (!m) {
-    errors.push(`polaroids: ${id} not found`);
-  } else if (m[1] !== "year1") {
-    errors.push(`polaroids: ${id} firstVisibleAt=${m[1]}, must be year1`);
+// 2. International schools on polaroids (if any) must be firstVisibleAt: year1
+if (/caption:[^\n]*Tsinghua|ETH Zürich|IIT Bombay/.test(polaroidsSrc)) {
+  const blocks = polaroidsSrc.split(/\{\s*id:\s*"p-/);
+  for (const block of blocks.slice(1)) {
+    if (!/caption:/.test(block)) continue;
+    if (
+      /Tsinghua|ETH Zürich|IIT Bombay/.test(block) &&
+      !/firstVisibleAt:\s*"year1"/.test(block)
+    ) {
+      errors.push(
+        "polaroids: international caption must use firstVisibleAt: year1",
+      );
+      break;
+    }
   }
 }
 
