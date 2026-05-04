@@ -103,8 +103,9 @@ export function SamWeek() {
           </div>
         </div>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-[5fr_4fr]">
-          <div className="relative">
+        <div className="mt-10 flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10">
+          {/* Cap portrait width so the SVG (esp. year-1 poster art) never dominates the viewport */}
+          <div className="relative mx-auto w-full max-w-[17.5rem] shrink-0 lg:mx-0 xl:max-w-[18.5rem]">
             <div className="relative overflow-hidden rounded-md border border-ink/15 bg-cream shadow-[0_8px_24px_-12px_rgba(26,26,26,0.25)]">
               <div className="aspect-[6/7] w-full">
                 <SamPanel phase={phase} />
@@ -145,7 +146,9 @@ export function SamWeek() {
             {showTicker ? <CohortTicker /> : null}
           </div>
 
-          <SamArtifacts />
+          <div className="min-w-0 flex-1">
+            <SamArtifacts />
+          </div>
         </div>
       </div>
     </section>
