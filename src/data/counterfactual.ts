@@ -20,7 +20,7 @@ export const COUNTERFACTUAL: CounterfactualEndpoint = {
     "OpenAI's Codex student program (launched 2027) captures the cohort Cursor didn't move on.",
   ],
   delta: {
-    headline: "4,200 DHVC actives. None recoverable through marketing.",
+    headline: "4,200 DHVC actives",
     sub: "By April 2030, with the campus program vs. without.",
   },
 };
