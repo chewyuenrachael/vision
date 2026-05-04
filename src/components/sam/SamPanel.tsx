@@ -618,29 +618,62 @@ function SamFigure({ showHat }: { showHat: boolean }) {
         fill="var(--color-cream)"
       />
 
-      {/* Hair — one continuous mass, hugs crown and forehead hairline (no floating arc) */}
-      <path
-        d="M 94 130
-          C 94 106, 108 93, 125 91.5
-          C 142 93, 156 106, 156 130
-          C 156 120, 146 113, 125 111.5
-          C 104 113, 94 120, 94 130 Z"
-        fill={STROKE}
-        opacity="0.9"
-      />
-      {/* A few short strand breaks at the crown so it reads as hair, not a solid helmet */}
-      <path
-        d="M 108 100 C 118 96, 132 96, 142 100"
-        strokeWidth="0.7"
-        opacity="0.35"
-        fill="none"
-      />
-      <path
-        d="M 112 104 Q 125 100, 138 104"
-        strokeWidth="0.55"
-        opacity="0.28"
-        fill="none"
-      />
+      {/* Hair — messy short cut: tufted crown, jagged fringe, side wisps (ref: textured/choppy) */}
+      <g opacity="0.92">
+        {/* Base mass — wavy top edge + zig-zag forehead */}
+        <path
+          d="M 97 125.5
+            L 100.5 117 L 104 121 L 108.5 113.5 L 113 119 L 118.5 112 L 124 117.5
+            L 129.5 111.5 L 135 117 L 141 112.5 L 147 118.5 L 152.5 114 L 156 123
+            C 157 108, 151.5 97, 141 92.5
+            C 132 88.5, 118 88.5, 109 92.5
+            C 98.5 97, 95.5 110, 97 125.5 Z"
+          fill={STROKE}
+        />
+        {/* Crown tufts — short messy spikes */}
+        <g
+          fill="none"
+          stroke={STROKE}
+          strokeWidth="0.95"
+          strokeLinecap="round"
+          opacity="0.9"
+        >
+          <path d="M 108 91 L 106.5 84.5" />
+          <path d="M 115 89 L 114 82.5" />
+          <path d="M 122 88 L 121.5 81" />
+          <path d="M 129 88.5 L 129 81.5" />
+          <path d="M 136 89 L 137 82" />
+          <path d="M 143 91 L 145.5 85" />
+          <path d="M 118 93 L 116.5 87.5" />
+          <path d="M 132 92.5 L 133.5 87" />
+        </g>
+        {/* Side tufts above ears */}
+        <path
+          d="M 98 120 L 94.5 115.5 M 99 116 L 96.5 112"
+          fill="none"
+          stroke={STROKE}
+          strokeWidth="0.85"
+          strokeLinecap="round"
+          opacity="0.88"
+        />
+        <path
+          d="M 152 120 L 155.5 115.5 M 151 116 L 153.5 112"
+          fill="none"
+          stroke={STROKE}
+          strokeWidth="0.85"
+          strokeLinecap="round"
+          opacity="0.88"
+        />
+        {/* Light stipple hint (reads “grain” without brown shading) */}
+        <g fill={STROKE} opacity="0.22">
+          <circle cx="114" cy="104" r="0.55" />
+          <circle cx="121" cy="99" r="0.45" />
+          <circle cx="128" cy="101" r="0.5" />
+          <circle cx="135" cy="98" r="0.45" />
+          <circle cx="123" cy="107" r="0.4" />
+          <circle cx="130" cy="105" r="0.4" />
+        </g>
+      </g>
 
       {/* Cursor cap — pops on after Day 0 */}
       <motion.g
