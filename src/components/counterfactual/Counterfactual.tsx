@@ -6,6 +6,7 @@ import { useTimeline } from "@/components/timeline/TimelineProvider";
 import { COUNTERFACTUAL } from "@/data/counterfactual";
 import { T_YEAR1 } from "@/lib/dates";
 import { DivergingTimelines } from "./DivergingTimelines";
+import { SceneTag } from "@/components/ui/SceneTag";
 
 export function Counterfactual() {
   const { setExtended, t } = useTimeline();
@@ -36,13 +37,14 @@ export function Counterfactual() {
       id="counterfactual"
       className="scene-snap relative w-full bg-ink px-4 py-20 text-cream"
     >
+      <SceneTag variant="dark" />
       <div className="mx-auto w-full max-w-7xl">
         <div className="flex items-baseline justify-between gap-6">
           <div>
             <div className="font-body text-xs uppercase tracking-[0.22em] text-cream/60">
               Closer
             </div>
-            <h2 className="mt-1 font-display text-3xl tracking-tight sm:text-4xl">
+            <h2 className="scene-title mt-1 text-3xl tracking-tight sm:text-4xl">
               The world we forfeit if we don’t
             </h2>
             <p className="mt-3 max-w-2xl font-body text-base text-cream/80">

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, Caveat } from "next/font/google";
+import { Fraunces, DM_Sans, Lora } from "next/font/google";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -9,14 +9,14 @@ const fraunces = Fraunces({
   axes: ["SOFT", "WONK", "opsz"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
-const caveat = Caveat({
-  variable: "--font-caveat",
+const lora = Lora({
+  variable: "--font-lora",
   subsets: ["latin"],
   display: "swap",
 });
@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${inter.variable} ${caveat.variable}`}
+      className={`${fraunces.variable} ${dmSans.variable} ${lora.variable}`}
     >
       <body>{children}</body>
     </html>

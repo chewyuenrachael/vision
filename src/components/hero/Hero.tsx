@@ -1,14 +1,55 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { SceneTag } from "@/components/ui/SceneTag";
+
+const HINT_KEY = "vision_keyboard_hint_seen";
 
 /**
  * Hero. SPEC §11.1.
  * Three lines. The third is the call to action — no button.
  */
 export function Hero() {
+  const [showKeyboardHint, setShowKeyboardHint] = useState(false);
+
+  // Client-only read: avoids SSR localStorage; pattern triggers strict lint without
+  // useSyncExternalStore because dismissal is same-tab only (no storage event).
+  useEffect(() => {
+    try {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional client hydration guard for localStorage
+      setShowKeyboardHint(!window.localStorage.getItem(HINT_KEY));
+    } catch {
+      setShowKeyboardHint(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!showKeyboardHint) return;
+    const hero = document.getElementById("hero");
+    if (!hero) return;
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (!e) return;
+        if (!e.isIntersecting && e.boundingClientRect.top < 0) {
+          try {
+            window.localStorage.setItem(HINT_KEY, "1");
+          } catch {
+            /* ignore */
+          }
+          setShowKeyboardHint(false);
+        }
+      },
+      { threshold: 0, rootMargin: "0px" },
+    );
+    obs.observe(hero);
+    return () => obs.disconnect();
+  }, [showKeyboardHint]);
+
   return (
     <section className="relative isolate flex min-h-[calc(100dvh-72px)] items-center px-6 pb-16 pt-12 sm:pt-20">
+      <SceneTag />
+
       <div className="mx-auto w-full max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 8 }}
@@ -57,14 +98,16 @@ export function Hero() {
             </motion.svg>
           </div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.4, duration: 0.8 }}
-            className="mt-2 font-body text-xs text-ink-mute"
-          >
-            Or use ← → on your keyboard. 1·2·3·4 jump to canonical stops.
-          </motion.p>
+          {showKeyboardHint ? (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.4, duration: 0.8 }}
+              className="mt-2 font-body text-xs text-ink-mute"
+            >
+              Or use ← → on your keyboard. 1·2·3·4 jump to canonical stops.
+            </motion.p>
+          ) : null}
         </motion.div>
       </div>
     </section>

@@ -7,9 +7,10 @@
  */
 
 @theme {
-  --color-cream: #faf7f2;
+  /* warmWhite + supporting surfaces */
+  --color-cream: #fffbf7;
   --color-cream-warm: #f3ecdf;
-  --color-cream-cool: #f7f4ee;
+  --color-cream-cool: #faf6f0;
   --color-ink: #1a1a1a;
   --color-ink-soft: #4a4a4a;
   --color-ink-mute: #8a8378;
@@ -20,8 +21,9 @@
   --color-pin: #b94f3a;
 
   --font-display: var(--font-fraunces), Georgia, serif;
-  --font-body: var(--font-inter), system-ui, sans-serif;
-  --font-hand: var(--font-caveat), "Comic Sans MS", cursive;
+  --font-body: var(--font-dm-sans), system-ui, sans-serif;
+  /* Lora: handwritten notes, chalkboard, recap quotes only */
+  --font-hand: var(--font-lora), Georgia, serif;
 }
 
 :root {
@@ -40,6 +42,23 @@ body {
 
 body {
   min-height: 100dvh;
+}
+
+/*
+ * Global zoom-out: render the whole artifact at ~67% size so it reads as a
+ * compact composition on a normal-sized desktop window. Equivalent to
+ * setting browser zoom to 67%, but baked in so viewers don't have to. Sticky
+ * slider and fixed footer continue to anchor to the (unzoomed) viewport
+ * edges, which is the desired behavior.
+ *
+ * NOTE: must be applied to <html>, not <body>. lightningcss/Tailwind v4
+ * appears to drop the property when it's nested under body in some builds.
+ * Mobile (<768px) is opted out so content stays legible on small screens.
+ */
+@media (min-width: 768px) {
+  html {
+    zoom: 0.67;
+  }
 }
 
 /* Phase-driven warm/cool atmosphere shift for the cafe. SPEC §4.2 */
@@ -110,6 +129,58 @@ body {
 
 main.snap-scroll {
   scroll-snap-type: y proximity;
+}
+
+/* Scene titles — Fraunces 400 (not heavy) */
+.scene-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+/* Themed week wall — single “alive” card at +180 */
+@keyframes happening-now-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 1px 3px -1px rgba(26, 26, 26, 0.12),
+      0 0 0 1px rgba(196, 100, 74, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 1px 3px -1px rgba(26, 26, 26, 0.12),
+      0 0 0 3px rgba(196, 100, 74, 0.45);
+  }
+}
+
+.happening-now-pulse {
+  animation: happening-now-glow 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .happening-now-pulse {
+    animation: none;
+    box-shadow: 0 0 0 2px rgba(196, 100, 74, 0.35);
+  }
+}
+
+/* Sam cohort ticker */
+@keyframes sam-ticker-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.sam-ticker-track {
+  animation: sam-ticker-marquee 48s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sam-ticker-track {
+    animation: none;
+  }
 }
 
 /* Reduce motion respect */
