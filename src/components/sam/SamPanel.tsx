@@ -38,7 +38,7 @@ export function SamPanel({ phase }: SamPanelProps) {
       <BgWhiteboard active={phase === "q2"} />
       <BgYear1Wall active={phase === "year1" || phase === "future"} />
 
-      <SamFigure />
+      <SamFigure showHat={phase !== "now"} />
     </svg>
   );
 }
@@ -558,10 +558,9 @@ function BgYear1Wall({ active }: { active: boolean }) {
 }
 
 /**
- * Sam himself — never changes across phases. Drawn last so he sits on top of
- * any background.
+ * Sam himself — face and body stay fixed; Cursor cap appears after Day 0 (+90 onward).
  */
-function SamFigure() {
+function SamFigure({ showHat }: { showHat: boolean }) {
   return (
     <g
       stroke={STROKE}
@@ -619,14 +618,71 @@ function SamFigure() {
         fill="var(--color-cream)"
       />
 
-      {/* Hair */}
+      {/* Hair — one continuous mass, hugs crown and forehead hairline (no floating arc) */}
       <path
-        d="M 92 132 C 88 110, 100 90, 124 90 C 152 90, 162 108, 158 132 C 158 124, 152 116, 144 114 C 136 110, 116 110, 108 116 C 100 120, 94 124, 92 132 Z"
+        d="M 94 130
+          C 94 106, 108 93, 125 91.5
+          C 142 93, 156 106, 156 130
+          C 156 120, 146 113, 125 111.5
+          C 104 113, 94 120, 94 130 Z"
         fill={STROKE}
         opacity="0.9"
       />
-      <path d="M 100 124 C 104 118, 110 118, 112 122" strokeWidth="0.8" />
-      <path d="M 138 122 C 142 118, 148 118, 150 124" strokeWidth="0.8" />
+      {/* A few short strand breaks at the crown so it reads as hair, not a solid helmet */}
+      <path
+        d="M 108 100 C 118 96, 132 96, 142 100"
+        strokeWidth="0.7"
+        opacity="0.35"
+        fill="none"
+      />
+      <path
+        d="M 112 104 Q 125 100, 138 104"
+        strokeWidth="0.55"
+        opacity="0.28"
+        fill="none"
+      />
+
+      {/* Cursor cap — pops on after Day 0 */}
+      <motion.g
+        initial={false}
+        animate={
+          showHat
+            ? { opacity: 1, scale: 1, y: 0 }
+            : { opacity: 0, scale: 0.55, y: -14 }
+        }
+        transition={{ type: "spring", stiffness: 380, damping: 20, mass: 0.8 }}
+        style={{ transformOrigin: "125px 98px", transformBox: "fill-box" }}
+      >
+        {/* Crown */}
+        <path
+          d="M 94 102 C 94 82, 110 72, 126 72 C 144 72, 158 86, 158 102 L 156 108 C 140 100, 112 100, 96 108 Z"
+          fill="var(--color-terracotta)"
+          stroke={STROKE}
+          strokeWidth="1.1"
+          strokeLinejoin="round"
+        />
+        {/* Visor */}
+        <path
+          d="M 96 106 Q 126 122, 162 108 L 160 104 Q 126 118, 98 104 Z"
+          fill="var(--color-terracotta)"
+          stroke={STROKE}
+          strokeWidth="1"
+          opacity="0.95"
+        />
+        {/* Subtle crown highlight */}
+        <path
+          d="M 102 88 Q 126 78, 150 92"
+          stroke="var(--color-cream)"
+          strokeWidth="0.55"
+          opacity="0.35"
+          fill="none"
+        />
+        {/* “Cursor” mark — paired chevrons */}
+        <g stroke="var(--color-cream)" strokeWidth="1.2" fill="none" opacity="0.95">
+          <path d="M 116 94 L 122 99 L 116 104" />
+          <path d="M 136 94 L 130 99 L 136 104" />
+        </g>
+      </motion.g>
 
       {/* Glasses */}
       <rect
