@@ -244,7 +244,7 @@ function BgWhiteboard({ active }: { active: boolean }) {
       <text
         x="26"
         y="28"
-        fontFamily="Caveat, cursive"
+        fontFamily="var(--font-lora), Georgia, serif"
         fontSize="11"
         fill="var(--color-terracotta)"
         opacity="0.9"
@@ -272,7 +272,7 @@ function BgWhiteboard({ active }: { active: boolean }) {
           <text
             x="26"
             y={y as number}
-            fontFamily="Caveat, cursive"
+            fontFamily="var(--font-lora), Georgia, serif"
             fontSize="8"
             fill="var(--color-ink)"
             opacity="0.85"
@@ -291,7 +291,7 @@ function BgWhiteboard({ active }: { active: boolean }) {
           <text
             x="60"
             y={y as number}
-            fontFamily="Caveat, cursive"
+            fontFamily="var(--font-lora), Georgia, serif"
             fontSize="8"
             fill="var(--color-ink)"
             opacity="0.7"
@@ -318,7 +318,7 @@ function BgWhiteboard({ active }: { active: boolean }) {
       <text
         x="148"
         y="46"
-        fontFamily="Caveat, cursive"
+        fontFamily="var(--font-lora), Georgia, serif"
         fontSize="7"
         fill="var(--color-ink)"
         opacity="0.7"
@@ -331,7 +331,7 @@ function BgWhiteboard({ active }: { active: boolean }) {
       <text
         x="186"
         y="46"
-        fontFamily="Caveat, cursive"
+        fontFamily="var(--font-lora), Georgia, serif"
         fontSize="7"
         fill="var(--color-ink)"
         opacity="0.7"
@@ -342,7 +342,7 @@ function BgWhiteboard({ active }: { active: boolean }) {
       <text
         x="186"
         y="58"
-        fontFamily="Caveat, cursive"
+        fontFamily="var(--font-lora), Georgia, serif"
         fontSize="7"
         fill="var(--color-ink)"
         opacity="0.7"
@@ -353,7 +353,7 @@ function BgWhiteboard({ active }: { active: boolean }) {
       <text
         x="186"
         y="70"
-        fontFamily="Caveat, cursive"
+        fontFamily="var(--font-lora), Georgia, serif"
         fontSize="7"
         fill="var(--color-ink)"
         opacity="0.7"
@@ -527,7 +527,7 @@ function BgYear1Wall({ active }: { active: boolean }) {
         <text
           x="195"
           y="86"
-          fontFamily="Caveat, cursive"
+          fontFamily="var(--font-lora), Georgia, serif"
           fontSize="6"
           fill="var(--color-ink)"
           opacity="0.85"

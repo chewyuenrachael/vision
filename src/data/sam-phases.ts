@@ -82,6 +82,12 @@ export const SAM_PHASES: Record<Phase, SamPhaseContent> = {
         unread: 24,
       },
       {
+        channel: "#self-serve-library",
+        preview:
+          "Sam contributed: 'CMU-specific catering vendor list' to the Cafe Cursor playbook.",
+        unread: 12,
+      },
+      {
         channel: "DM · Columbia ambassador",
         preview: "Stealing your speaker-confirm script, hope that's ok.",
         unread: 4,
