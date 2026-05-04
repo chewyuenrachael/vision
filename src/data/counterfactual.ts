@@ -17,6 +17,7 @@ export const COUNTERFACTUAL: CounterfactualEndpoint = {
     "No generational moat.",
     "The 2030 grad reaches for whatever Anthropic captured in 2026–2027.",
     "Cursor's procurement story relies on individual switching, which has 10× the CAC.",
+    "OpenAI's Codex student program (launched 2027) captures the cohort Cursor didn't move on.",
   ],
   delta: {
     headline: "4,200 DHVC actives. None recoverable through marketing.",

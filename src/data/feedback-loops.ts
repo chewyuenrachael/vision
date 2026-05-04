@@ -86,21 +86,6 @@ export const FEEDBACK_LOOPS: FeedbackLoop[] = [
     id: "loop-6",
     number: 6,
     observation: {
-      author: "Reem",
-      affiliation: "Columbia Law",
-      text: "My legal-research workflow needs jurisdiction-aware citation formatting.",
-    },
-    shipped: {
-      feature: "MCP server template",
-      description: "Reference template for citation tooling.",
-    },
-    arrivesAt: "year1",
-    latencyWeeks: 10,
-  },
-  {
-    id: "loop-7",
-    number: 7,
-    observation: {
       author: "Sofia",
       affiliation: "UCSF computational bio",
       text: "Protein-folding repos use Jupyter heavily; agent loses state across cells.",
@@ -111,6 +96,23 @@ export const FEEDBACK_LOOPS: FeedbackLoop[] = [
     },
     arrivesAt: "year1",
     latencyWeeks: 8,
+  },
+  {
+    id: "loop-7",
+    number: 7,
+    observation: {
+      author: "Reem",
+      affiliation: "Columbia Law",
+      text: "Legal-pack: contract clause autocomplete for transactional clinics.",
+    },
+    shipped: {
+      feature: "MCP server template",
+      description:
+        "In development — reference template for jurisdiction-aware citation tooling (ETA Q2 2027).",
+    },
+    arrivesAt: "year1",
+    latencyWeeks: 10,
+    productPending: true,
   },
 ];
 

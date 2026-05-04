@@ -100,6 +100,8 @@ export interface FeedbackLoop {
   shipped: { feature: string; description: string };
   arrivesAt: Phase;
   latencyWeeks: number;
+  /** When true, product side stays in-flight (not ✓ shipped) even after arrivesAt. */
+  productPending?: boolean;
 }
 
 export interface SamPhaseContent {

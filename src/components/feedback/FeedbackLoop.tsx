@@ -2,11 +2,31 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTimeline } from "@/components/timeline/TimelineProvider";
-import { FEEDBACK_LOOPS, MEDIAN_LATENCY_WEEKS } from "@/data/feedback-loops";
+import { FEEDBACK_LOOPS } from "@/data/feedback-loops";
 import { FeedbackCard } from "./FeedbackCard";
 import { FeedbackArrow } from "./FeedbackArrow";
+import { SceneTag } from "@/components/ui/SceneTag";
 import { PHASE_INDEX } from "@/lib/phases";
 import type { FeedbackLoop } from "@/lib/types";
+
+function cardStates(
+  loop: FeedbackLoop,
+  currentPhaseIndex: number,
+): { left: "before-intro" | "in-flight" | "shipped"; right: "before-intro" | "in-flight" | "shipped" } {
+  const arrives = PHASE_INDEX[loop.arrivesAt];
+  const leftBefore = currentPhaseIndex < arrives - 1;
+  const left: "before-intro" | "in-flight" | "shipped" = leftBefore
+    ? "before-intro"
+    : currentPhaseIndex >= arrives
+      ? "shipped"
+      : "in-flight";
+  let right: "before-intro" | "in-flight" | "shipped";
+  if (currentPhaseIndex < arrives - 1) right = "before-intro";
+  else if (currentPhaseIndex >= arrives && !loop.productPending)
+    right = "shipped";
+  else right = "in-flight";
+  return { left, right };
+}
 
 interface CardRect {
   cx: number;
@@ -15,19 +35,6 @@ interface CardRect {
   left: number;
   top: number;
   bottom: number;
-}
-
-function loopState(
-  loop: FeedbackLoop,
-  currentPhaseIndex: number,
-): "before-intro" | "in-flight" | "shipped" {
-  // The observation appears as soon as the author exists in the cafe; for
-  // simplicity we tie it to one phase before arrival, except for q1-arrivals
-  // which are born "in flight" at `now`.
-  const arrives = PHASE_INDEX[loop.arrivesAt];
-  if (currentPhaseIndex >= arrives) return "shipped";
-  if (currentPhaseIndex >= arrives - 1) return "in-flight";
-  return "before-intro";
 }
 
 export function FeedbackLoopScene() {
@@ -101,19 +108,28 @@ export function FeedbackLoopScene() {
       id="feedback"
       className="scene-snap relative w-full bg-cream px-4 py-20"
     >
+      <SceneTag />
       <div className="mx-auto w-full max-w-7xl">
-        <div className="flex items-baseline justify-between gap-6">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div>
             <div className="font-body text-xs uppercase tracking-[0.22em] text-ink-mute">
               Scene 4
             </div>
-            <h2 className="mt-1 font-display text-3xl tracking-tight text-ink sm:text-4xl">
+            <h2 className="scene-title mt-1 text-3xl tracking-tight text-ink sm:text-4xl">
               The feedback loop
             </h2>
             <p className="mt-3 max-w-2xl font-body text-base text-ink-soft">
               From a TA in a lab to a shipped product change. No competitor has
               this loop because no competitor has these students.
             </p>
+          </div>
+          <div className="max-w-md rounded-md border border-terracotta/25 bg-terracotta/[0.06] px-4 py-3 font-body text-sm leading-snug text-ink-soft">
+            <span className="font-medium text-ink">Median: 8.2 weeks</span> from
+            observation to shipped change.{" "}
+            <span className="text-ink">
+              Anthropic&apos;s median: unmeasurable — they don&apos;t have this
+              data structure.
+            </span>
           </div>
         </div>
 
@@ -131,7 +147,7 @@ export function FeedbackLoopScene() {
           </div>
 
           {FEEDBACK_LOOPS.map((loop) => {
-            const state = loopState(loop, phaseIndex);
+            const { left, right } = cardStates(loop, phaseIndex);
             return (
               <div
                 key={loop.id}
@@ -143,7 +159,7 @@ export function FeedbackLoopScene() {
                   }}
                   className="md:col-start-1"
                 >
-                  <FeedbackCard loop={loop} side="left" state={state} />
+                  <FeedbackCard loop={loop} side="left" state={left} />
                 </div>
                 {/* Spacer column for arrow on desktop */}
                 <div className="hidden md:block" />
@@ -153,7 +169,7 @@ export function FeedbackLoopScene() {
                   }}
                   className="md:col-start-3"
                 >
-                  <FeedbackCard loop={loop} side="right" state={state} />
+                  <FeedbackCard loop={loop} side="right" state={right} />
                 </div>
               </div>
             );
@@ -168,14 +184,15 @@ export function FeedbackLoopScene() {
               {FEEDBACK_LOOPS.map((loop) => {
                 const r = rects.get(loop.id);
                 if (!r) return null;
-                const state = loopState(loop, phaseIndex);
-                if (state === "before-intro") return null;
+                const { left, right } = cardStates(loop, phaseIndex);
+                if (left === "before-intro" || right === "before-intro")
+                  return null;
                 return (
                   <FeedbackArrow
                     key={loop.id}
                     from={{ x: r.left.right + 8, y: r.left.cy }}
                     to={{ x: r.right.left - 8, y: r.right.cy }}
-                    shipped={state === "shipped"}
+                    shipped={right === "shipped"}
                     latencyWeeks={loop.latencyWeeks}
                   />
                 );
@@ -185,11 +202,9 @@ export function FeedbackLoopScene() {
         </div>
 
         <p className="mt-10 max-w-3xl font-body text-sm italic text-ink-soft">
-          Median latency from observation to shipped product change:{" "}
-          <span className="not-italic font-medium text-ink">
-            {MEDIAN_LATENCY_WEEKS} weeks
-          </span>
-          . The campus program is Cursor’s fastest product-feedback channel.
+          The campus program is Cursor&apos;s fastest product-feedback channel —
+          because every row above is reconstructible from Beacon&apos;s
+          append-only log.
         </p>
       </div>
     </section>

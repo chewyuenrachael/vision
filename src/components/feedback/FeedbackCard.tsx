@@ -10,6 +10,8 @@ interface Props {
 }
 
 export function FeedbackCard({ loop, side, state }: Props) {
+  const dimProductPending =
+    side === "right" && Boolean(loop.productPending) && state === "in-flight";
   const visible = state !== "before-intro";
 
   if (side === "left") {
@@ -61,6 +63,8 @@ export function FeedbackCard({ loop, side, state }: Props) {
       }}
       transition={{ duration: 0.32 }}
       className={`relative rounded-md border p-4 transition-colors ${
+        dimProductPending ? "opacity-55 " : ""
+      }${
         isShipped
           ? "border-ink/20 bg-ink text-cream shadow-[0_4px_14px_-6px_rgba(26,26,26,0.45)]"
           : "border-dashed border-ink/30 bg-cream-warm/40 text-ink-mute"
