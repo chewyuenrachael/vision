@@ -27,7 +27,7 @@ export function Bubble({ bubble, x, y, expanded, onEnter, onLeave, phase }: Bubb
   const pulseScale = 1.5 + Math.min(i, 3) * 0.15; // 1.5× → 1.95×
   return (
     <motion.div
-      className="pointer-events-auto absolute"
+      className="pointer-events-auto absolute z-[60]"
       style={{ left: x, top: y, transform: "translate(-50%, -100%)" }}
       onPointerEnter={onEnter}
       onPointerLeave={onLeave}
@@ -64,7 +64,7 @@ export function Bubble({ bubble, x, y, expanded, onEnter, onLeave, phase }: Bubb
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.18, ease: [0.2, 0.8, 0.2, 1] }}
-          className="relative w-72 rounded-md border border-ink/15 bg-cream p-4 shadow-[0_18px_40px_-12px_rgba(26,26,26,0.4)]"
+          className="relative z-[70] w-72 rounded-md border border-ink/15 bg-cream p-4 shadow-[0_18px_40px_-12px_rgba(26,26,26,0.4)]"
         >
           <div className="flex items-baseline justify-between gap-3">
             <div>
