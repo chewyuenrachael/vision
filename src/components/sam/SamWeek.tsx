@@ -14,14 +14,14 @@ const SAM_TICKER =
 function SelfServeLibraryStamp() {
   return (
     <div className="mt-4 rounded-md border border-ink/12 bg-cream/90 px-4 py-3">
-      <p className="font-body text-sm leading-snug text-ink-soft">
+      <p className="font-body text-base leading-relaxed text-ink-soft sm:text-[17px]">
         Sam ran this week without me. The{" "}
         <span className="font-medium text-ink">Self-Serve Library</span> template
         is what made it possible.
       </p>
       <div className="mt-3 flex items-center gap-3">
         <div
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-terracotta/35 bg-terracotta/10 text-terracotta"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border border-terracotta/35 bg-terracotta/10 text-terracotta"
           aria-hidden
         >
           {/* Book glyph — paired with Beacon “signal” geometry */}
@@ -43,8 +43,10 @@ function SelfServeLibraryStamp() {
           </svg>
         </div>
         <div>
-          <div className="font-display text-sm text-ink">Self-Serve Library</div>
-          <div className="mt-0.5 font-body text-[11px] text-ink-mute">
+          <div className="font-display text-base text-ink sm:text-lg">
+            Self-Serve Library
+          </div>
+          <div className="mt-0.5 font-body text-sm text-ink-mute">
             v1.2 · 8 playbooks · 30% ambassador-contributed · accessed by Sam 14
             times this week
           </div>
@@ -57,15 +59,15 @@ function SelfServeLibraryStamp() {
 function CohortTicker() {
   return (
     <div className="mt-4 overflow-hidden border-t border-ink/10 pt-3">
-      <div className="font-body text-[11px] uppercase tracking-[0.12em] text-ink-mute">
+      <div className="font-body text-xs uppercase tracking-[0.12em] text-ink-mute">
         Same week · 45-person cohort
       </div>
       <div className="relative mt-2 overflow-hidden">
         <div className="sam-ticker-track flex w-max">
-          <span className="whitespace-nowrap pr-20 font-body text-[12px] text-ink-soft">
+          <span className="whitespace-nowrap pr-20 font-body text-sm text-ink-soft sm:text-base">
             {SAM_TICKER}
           </span>
-          <span className="whitespace-nowrap pr-20 font-body text-[12px] text-ink-soft">
+          <span className="whitespace-nowrap pr-20 font-body text-sm text-ink-soft sm:text-base">
             {SAM_TICKER}
           </span>
         </div>
@@ -103,10 +105,9 @@ export function SamWeek() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10">
-          {/* Cap portrait width so the SVG (esp. year-1 poster art) never dominates the viewport */}
-          <div className="relative mx-auto w-full max-w-[17.5rem] shrink-0 lg:mx-0 xl:max-w-[18.5rem]">
-            <div className="relative overflow-hidden rounded-md border border-ink/15 bg-cream shadow-[0_8px_24px_-12px_rgba(26,26,26,0.25)]">
+        <div className="mt-10 grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-10">
+          <div className="relative min-w-0 w-full">
+            <div className="relative w-full overflow-hidden rounded-md border border-ink/15 bg-cream shadow-[0_8px_24px_-12px_rgba(26,26,26,0.25)]">
               <div className="aspect-[6/7] w-full">
                 <SamPanel phase={phase} />
               </div>
@@ -117,12 +118,12 @@ export function SamWeek() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -4 }}
                   transition={{ duration: 0.32 }}
-                  className="border-t border-ink/10 px-5 py-4"
+                  className="border-t border-ink/10 px-5 py-4 sm:px-6 sm:py-5"
                 >
-                  <div className="font-body text-[10px] uppercase tracking-[0.22em] text-ink-mute">
+                  <div className="font-body text-[11px] uppercase tracking-[0.22em] text-ink-mute sm:text-xs">
                     setting
                   </div>
-                  <p className="mt-1 font-body text-sm text-ink-soft">
+                  <p className="mt-1 font-body text-base leading-relaxed text-ink-soft sm:text-[17px]">
                     {data.setting}
                   </p>
                 </motion.div>
@@ -136,7 +137,7 @@ export function SamWeek() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
                 transition={{ duration: 0.32 }}
-                className="mt-4 max-w-xl font-display text-base italic leading-snug text-ink-soft sm:text-lg"
+                className="mt-4 max-w-none font-display text-lg italic leading-snug text-ink-soft sm:text-xl"
               >
                 {data.caption}
               </motion.p>
@@ -146,7 +147,7 @@ export function SamWeek() {
             {showTicker ? <CohortTicker /> : null}
           </div>
 
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 w-full">
             <SamArtifacts />
           </div>
         </div>
