@@ -3,7 +3,7 @@
 import { Modal } from "@/components/ui/Modal";
 
 /**
- * About this artifact. SPEC §9 — the intellectual-honesty layer, verbatim.
+ * About this artifact — composite / aspirational framing (SPEC §9 excerpt).
  */
 export function AboutModal({
   open,
@@ -43,17 +43,6 @@ export function AboutModal({
           names invented, builds authored to feel like real student work. The
           themed weeks are vision, not committed roadmap. The feedback loop
           latency number (8.2 weeks) is a claim I intend to make true.
-        </p>
-        <p className="italic">
-          Beacon is real and live. The 30-60-90 plan is real and committed. The
-          DHVC math is real.
-        </p>
-      </div>
-
-      <div className="mt-6 border-t border-ink/10 pt-4">
-        <p className="font-body text-xs text-ink-mute">
-          The signal: I’m not selling fiction. I’m showing the world I’ll
-          build, while telling you which parts are which.
         </p>
       </div>
     </Modal>
