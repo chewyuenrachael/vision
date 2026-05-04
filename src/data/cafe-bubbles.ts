@@ -130,6 +130,28 @@ export const CAFE_BUBBLES: CafeBubble[] = [
     origin: "us",
     domain: "cs",
   },
+  {
+    id: "vinh",
+    name: "Vinh",
+    school: "UIUC",
+    short: "Sysadmin club runs Cursor in the department lab image now.",
+    long:
+      "Vinh, CS junior @ UIUC — “We rebuilt the lab’s assignment harness in a weekend. Prof asked us to brief faculty senate.”",
+    firstVisibleAt: "q2",
+    origin: "us",
+    domain: "cs",
+  },
+  {
+    id: "zoe",
+    name: "Zoe",
+    school: "Princeton",
+    short: "ORFE junior wiring Cursor into the stochastic processes course repo.",
+    long:
+      "Zoe, ORFE @ Princeton — “My TF runs Cursor for all problem-set scaffolding. A quarter of the class followed in two weeks.”",
+    firstVisibleAt: "q2",
+    origin: "us",
+    domain: "cs",
+  },
   // International wedge — visible only from +360. The Q3 deliberate move.
   {
     id: "chen",
