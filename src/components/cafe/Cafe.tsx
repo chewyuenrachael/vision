@@ -275,7 +275,7 @@ export function Cafe() {
                 return (
                   <div
                     key={d.id}
-                    className="pointer-events-none absolute"
+                    className="pointer-events-none absolute z-10"
                     style={{
                       left: px,
                       top: py,
